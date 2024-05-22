@@ -1,11 +1,16 @@
 import "dotenv/config";
-import mongoose from "mongoose";
 
-import db_name from "./constants.js";
+import { app } from "./app.js";
 
 import connectdb from "./db/index.js";
 
-await connectdb();
+connectdb()
+  .then(
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
+    })
+  )
+  .catch();
 
 // (async () => {
 //   try {
